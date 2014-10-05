@@ -65,9 +65,9 @@ void CircleBy::update(float)
     _times++;
     
     /*以下的代码将做圆周运动的轨迹绘制了出来，必要的时候可以删除掉*/
-    auto draw = DrawNode::create();
-    _target->getParent()->addChild(draw);
-    draw->drawDot(_target->getPosition(),1,Color4F(1,1,1,1));
+//    auto draw = DrawNode::create();
+//    _target->getParent()->addChild(draw);
+//    draw->drawDot(_target->getPosition(),1,Color4F(1,1,1,1));
 }
 
 CircleBy* CircleBy::reverse() const
