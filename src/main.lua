@@ -42,7 +42,7 @@ local function main()
     end
     
     --使用模块FlashScene 
-    local scene = require("MainGameScene")
+    local scene = require("FlashScene")
     --使用模块中的接口函数create，创建一个场景
     local gameScene = scene.create()
     

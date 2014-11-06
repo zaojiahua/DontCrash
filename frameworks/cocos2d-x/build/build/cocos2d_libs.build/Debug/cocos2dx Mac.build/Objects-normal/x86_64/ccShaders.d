@@ -1,0 +1,33 @@
+dependencies: \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShaders.cpp \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/build/../cocos/renderer/ccShaders.h \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/build/../cocos/platform/mac/CCGL.h \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/build/../cocos/base/CCPlatformConfig.h \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/build/../cocos/base/CCPlatformMacros.h \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/build/../cocos/base/ccConfig.h \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/build/../cocos/platform/mac/CCPlatformDefine.h \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Position_uColor.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Position_uColor.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionColor.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionColor.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTexture.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTexture.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureA8Color.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureA8Color.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureColor.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureColor.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureColor_noMVP.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureColor_noMVP.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTextureColorAlphaTest.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTexture_uColor.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionTexture_uColor.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionColorLengthTexture.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_PositionColorLengthTexture.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Label.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Label_df.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Label_df_glow.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Label_normal.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_Label_outline.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_3D_PositionTex.vert \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_3D_Color.frag \
+  /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/cocos2d-x/cocos/renderer/ccShader_3D_ColorTex.frag

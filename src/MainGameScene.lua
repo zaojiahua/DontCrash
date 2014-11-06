@@ -254,7 +254,7 @@ function MainGameScene:mainLogic(layer)
     self.track_size = track:getContentSize()
 
     --创建一个红色小车
-    local car_red = cc.Sprite:create("car.png")
+    local car_red = cc.Sprite:create("car3.png")
     car_red:setPosition(self.track_size.width*0.45,self.track_size.height*0.063)
     car_red:setTag(1)
     self.car_bottomy = car_red:getPositionY()
@@ -262,8 +262,8 @@ function MainGameScene:mainLogic(layer)
     self.car_red = car_red
 
     --创建一个黄色小车
-    local car_yello = cc.Sprite:create("car2.png")
-    car_yello:setRotation(180)
+    local car_yello = cc.Sprite:create("car4.png")
+    car_yello:setRotation(0)
     car_yello:setPosition(car_red:getPositionX()+car_red:getContentSize().width,self.track_size.height*0.063)
     car_yello:setTag(2)
     self.car_yello = car_yello
@@ -443,11 +443,6 @@ function MainGameScene:addBg(layer)
     local bg = cc.Sprite:create("bg.png")
     bg:setPosition(self.size.width/2,self.size.height/2)
     layer:addChild(bg)
-
-    --bg2
-    local bg2 = cc.Sprite:create("bg2.png")
-    bg2:setPosition(self.size.width/2,self.size.height/2)
-    layer:addChild(bg2)
 end
 
 return MainGameScene

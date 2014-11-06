@@ -29,6 +29,7 @@ LOCAL_SRC_FILES := \
 ../../Classes/VisibleRect.cpp \
 ../../Classes/AppDelegate.cpp \
 ../../Classes/ConfigParser.cpp \
+../../Classes/CircleBy.cpp \
 lua/Runtime_android.cpp \
 lua/main.cpp
 

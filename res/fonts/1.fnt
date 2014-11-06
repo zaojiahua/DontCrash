@@ -1,0 +1,10 @@
+info face="STBaoli-SC-Regular" size=64 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
+common lineHeight=89 base=68 scaleW=256 scaleH=128 pages=1 packed=0
+page id=0 file="1.png"
+chars count=6
+char id=22868 x=2 y=2 width=68 height=45 xoffset=0 yoffset=27 xadvance=64 page=0 chnl=0 letter="奔"
+char id=23064 x=72 y=2 width=68 height=45 xoffset=1 yoffset=27 xadvance=64 page=0 chnl=0 letter="娘"
+char id=36305 x=142 y=2 width=67 height=44 xoffset=2 yoffset=28 xadvance=64 page=0 chnl=0 letter="跑"
+char id=26032 x=2 y=49 width=66 height=44 xoffset=1 yoffset=27 xadvance=64 page=0 chnl=0 letter="新"
+char id=21543 x=70 y=49 width=64 height=42 xoffset=4 yoffset=29 xadvance=64 page=0 chnl=0 letter="吧"
+char id=32 x=136 y=49 width=0 height=0 xoffset=18 yoffset=88 xadvance=18 page=0 chnl=0 letter="space"

@@ -36,27 +36,46 @@ function FlashScene:createLayer()
     --使用Cocos提供的模块cc，调用Sprite的方法创建一个logo出来，你在Cocos2d-x看到的内容，都可以从这个模块中获得（前提是有导出）
     local logo = cc.Sprite:create("logo.png")
     logo:setPosition(self.size.width/2,self.size.height/2)
+    logo:setScale(0.1)
     layer:addChild(logo)
     
-    --logo执行一个淡入淡出的动作
-    logo:setOpacity(0)
-    local action = cc.Sequence:create(cc.FadeIn:create(2),cc.CallFunc:create(action_callback)) 
-    logo:runAction(action)
-     
-    --游戏标题
-    local title = cc.Sprite:create("title.png")
-    title:setPosition(self.size.width+title:getContentSize().width/2,self.size.height*0.88) 
-    layer:addChild(title)
-    
     --title执行动作
-    --moveto的第二个参数是一个table，里边的成员是命名参数，必须指定参数的名字为x和y，许多的函数调用都需要这么做
-    local title_action = cc.Sequence:create(cc.MoveTo:create(0.5,{x=self.size.width/2-100,y=title:getPositionY()}),                               
-         cc.Spawn:create(cc.MoveBy:create(0.1,{x=200,y=0}),cc.SkewTo:create(0.1,0,-45)),
-         cc.Spawn:create(cc.MoveBy:create(0.2,{x=-150,y=0}),cc.SkewTo:create(0.2,0,45)),
-         cc.Spawn:create(cc.MoveBy:create(0.2,{x=50,y=0}),cc.SkewTo:create(0.2,0,0))
-         )           
-    title:runAction(title_action)     
+    local title_callback = function()
+        local title = {}
+        local jumpBy = cc.JumpBy:create(1.5,cc.p(0,0),self.size.height*0.1,5)
+        local move = cc.MoveBy:create(1.5,cc.p(-self.size.width*0.8,0))
+        local title_action = cc.Spawn:create(jumpBy,move) 
+
+        for i,v in pairs({"奔","跑","吧","新","娘"}) do
+            title[i] = cc.Label:createWithBMFont("fonts/1.fnt",v)
+            title[i]:setPosition(self.size.width+self.size.width*0.1*i,self.size.height*0.5)
+            layer:addChild(title[i])
+        end
+        
+        local index = 1
+        local index_callback
+        index_callback = function()
+            index = index+1
+            if index ~= table.getn(title) then
+                title[index]:runAction(cc.Sequence:create(title_action,cc.CallFunc:create(index_callback)))
+            else
+                title[index]:runAction(cc.Sequence:create(title_action,cc.DelayTime:create(1),cc.CallFunc:create(action_callback)))
+            end
+        end
+        title[index]:runAction(cc.Sequence:create(title_action,cc.CallFunc:create(index_callback)))
+    end
     
+    --logo执行一个淡入淡出的动作
+    local scale = cc.EaseElasticOut:create(cc.ScaleTo:create(2,1.5))
+    local action = cc.Sequence:create(scale,cc.FadeOut:create(1),cc.CallFunc:create(title_callback))
+    logo:runAction(action)
+    
+    --particle
+    local particleSystemQuad = cc.ParticleSystemQuad:create("particle/vanishingPoint.plist")
+    particleSystemQuad:setAnchorPoint(cc.p(0.5,0.5))
+    particleSystemQuad:setPosition(cc.p(self.size.width/2,self.size.height/2))
+    layer:addChild(particleSystemQuad)
+     
     return layer
 end
 
