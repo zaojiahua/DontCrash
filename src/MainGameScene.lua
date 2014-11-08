@@ -1,5 +1,7 @@
 require("Cocos2d")
 require("Cocos2dConstants")
+require("SoundDeal")
+require("GlobalData")
 
 local MainGameScene = class("MainGameScene",function()
     return cc.Scene:create()
@@ -31,7 +33,67 @@ function MainGameScene:createLayer()
     --实现与用户的交互
     self:userInteraction(layer)
     
+    --ui
+    self:setUI(layer)
+      
     return layer
+end
+
+--设置UI，比如分数
+function MainGameScene:setUI(layer)
+    self.score = cc.Label:createWithBMFont("fonts/number.fnt","0")
+    self.score:setPosition(cc.p(self.size.width/2,self.size.height/2))
+    layer:addChild(self.score)
+end
+
+--碰撞检测
+function MainGameScene:collision(layer)
+    --是否播放yes的声音
+    local isYes = false
+    
+    local collistion_update = function()
+        --获得俩辆小车的位置，宽度
+        local red_x,red_y = self.car_red:getPosition()
+        local yello_x,yello_y = self.car_yello:getPosition()
+        local red_width = self.car_red:getContentSize().width
+        local yello_width = self.car_yello:getContentSize().width
+        --碰撞检测的条件
+        if self.red_switch == self.yello_switch and math.abs(red_x-yello_x)<(red_width+yello_width)/2 then
+            --停止小车运动，停止游戏
+            self.car_red:stopAllActions()
+            self.car_yello:stopAllActions()
+            self.play = false
+            --播放声音
+            SoundDeal:playEffect(EffectType.Crash)
+            cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.schedule_update)
+            self:gameOver(layer)
+        --没有发生碰撞检测俩车错过去，记录一下
+        elseif self.red_switch ~= self.yello_switch and math.abs(red_x-yello_x)<(red_width+yello_width)/2 then
+            --满足播放yes的条件
+            isYes = true    
+        --在俩车相错的这段时间如果任然没有发生碰撞检测则真的是错过去了
+        elseif math.abs(red_x-yello_x)>(red_width+yello_width)/2 and isYes then
+            isYes = false
+            --设置全局的分数数据
+            GlobalData:setScore()
+            --改变UI
+            self.score:setString(GlobalData.score)
+            self.score:setScale(0.1)
+            self.score:runAction(cc.EaseElasticOut:create(cc.ScaleTo:create(0.2,1)))
+        end
+    end
+    --每帧都进行碰撞检测
+    self.schedule_update = cc.Director:getInstance():getScheduler():scheduleScriptFunc(collistion_update,0,false)
+end
+
+--游戏介绍以后的处理
+function MainGameScene:gameOver(layer)
+    self:setButton("retry.png",layer)
+    --清除数据
+    GlobalData:reset()
+    self.score:setString("0")
+    --重新设置小车的位置
+    self:resetCar()
 end
 
 --用户交互
@@ -39,8 +101,12 @@ function MainGameScene:userInteraction(layer)
 
     --触摸处理函数
     local function onTouchBegan()
-        self:switchTrace(self.car_red)
-        return false
+        if self.play then
+            --播放音效
+            SoundDeal:playEffect(EffectType.Tap)
+            self:switchTrace(self.car_red)
+            return false
+        end
     end
 
     --注册触摸
@@ -48,6 +114,21 @@ function MainGameScene:userInteraction(layer)
     touch_listener:registerScriptHandler(onTouchBegan,cc.Handler.EVENT_TOUCH_BEGAN )
     local eventDispatcher = layer:getEventDispatcher()
     eventDispatcher:addEventListenerWithSceneGraphPriority(touch_listener,layer)
+    
+    --监听手机返回键
+    local key_listener = cc.EventListenerKeyboard:create()
+
+    --返回键回调
+    local function key_return(keyCode)
+        --结束游戏
+        if keyCode == cc.KeyCode.KEY_BACK or keyCode == cc.KeyCode.KEY_BACKSPACE then
+            cc.Director:getInstance():endToLua()
+        end
+    end
+    --lua中得回调，分清谁绑定，监听谁，事件类型是什么
+    key_listener:registerScriptHandler(key_return,cc.Handler.EVENT_KEYBOARD_RELEASED)
+    local eventDispatch = layer:getEventDispatcher()
+    eventDispatch:addEventListenerWithSceneGraphPriority(key_listener,layer)
 end
 
 --小车变道
@@ -156,7 +237,7 @@ end
 --设置运动的参数
 function MainGameScene:setParam(car,circleCenter1,point1,point2)
     --根据速率计算小车需要运动的时间
-    local rate = math.pi*self.track_size.height*0.3
+    local rate = GlobalData.rate
     --圆周运动的半径
     local radius = self._radius
     --以下的变量代表的含义是，左圆周运动时间，上直线运动时间，右圆周运动时间，下直线运动时间，左圆周运动弧度数，右圆周运动的弧度数
@@ -257,14 +338,15 @@ function MainGameScene:mainLogic(layer)
     local car_red = cc.Sprite:create("car3.png")
     car_red:setPosition(self.track_size.width*0.45,self.track_size.height*0.063)
     car_red:setTag(1)
+    car_red:setRotation(180)
     self.car_bottomy = car_red:getPositionY()
     self.car_topy = self.track_size.height*0.95
     self.car_red = car_red
 
     --创建一个黄色小车
     local car_yello = cc.Sprite:create("car4.png")
-    car_yello:setRotation(0)
-    car_yello:setPosition(car_red:getPositionX()+car_red:getContentSize().width,self.track_size.height*0.063)
+    car_yello:setRotation(180)
+    car_yello:setPosition(car_red:getPositionX()+2*car_red:getContentSize().width,self.track_size.height*0.063)
     car_yello:setTag(2)
     self.car_yello = car_yello
 
@@ -275,10 +357,17 @@ function MainGameScene:mainLogic(layer)
     --纪录小车是否变轨的变量
     self.red_switch = false
     self.yello_switch = false
-    
-    --让小车动起来
-    self:runRedCar(car_red)
-    self:runYelloCar(car_yello)
+end
+
+--重置小车的位置
+function MainGameScene:resetCar()
+    self.car_red:setPosition(self.track_size.width*0.45,self.track_size.height*0.063)
+    self.car_red:setRotation(180)
+    self.car_yello:setRotation(180)
+    self.car_yello:setPosition(self.car_red:getPositionX()+2*self.car_red:getContentSize().width,self.track_size.height*0.063)
+    --纪录小车是否变轨的变量
+    self.red_switch = false
+    self.yello_switch = false
 end
 
 --小车运动
@@ -331,7 +420,7 @@ function MainGameScene:runRedCar(car)
     local y1,y2,point1,point2 = getParam()
 
     --[[根据速率计算小车需要运动的时间--]]
-    local rate = math.pi*self.track_size.height*0.3
+    local rate = GlobalData.rate
     --圆周运动的时间
     local tm = math.pi*self._radius/rate
     --直线运动的时间
@@ -382,7 +471,7 @@ function MainGameScene:runYelloCar(car)
         end
          
         --[[根据速率计算小车需要运动的时间--]]
-        local rate = math.pi*self.track_size.height*0.3
+        local rate = GlobalData.rate
         --圆周运动的时间
         local tm = math.pi*y1/rate
         --直线运动的时间
@@ -401,6 +490,9 @@ function MainGameScene:runYelloCar(car)
     
     local tm,tm2,spawn1,move2,spawn2,move1 = getAction()
         
+    --先将是否变轨的变量保存一下
+    local switch= self.yello_switch
+    
     --获得一个随机数
     math.randomseed(os.time())
     local r = math.random(0,100)
@@ -409,7 +501,11 @@ function MainGameScene:runYelloCar(car)
         --变轨固定在这个点 进入内部的轨道
         local circle1 = cc.Spawn:create(tt.CircleBy:create(tm/2,{x=-30,y=self.track_size.height*0.4},-90),cc.RotateBy:create(tm/2,-90))
         local circle2 = cc.Spawn:create(tt.CircleBy:create(tm/2,{x=-162,y=self.track_size.height*0.0015},-90),cc.RotateBy:create(tm/2,-90))
-        spawn1 = cc.Sequence:create(circle1,circle2)
+        --修正bug，增加一个动作，当小车运行完四分之一的轨迹以后就设置代表内外圈轨道的变量switch
+        spawn1 = cc.Sequence:create(
+        circle1,cc.CallFunc:create(function()self.yello_switch = true end),
+        circle2
+        )
         --代表里圈轨道
         self.yello_switch = true
         tm,tm2,_,move2,spawn2,_ = getAction()
@@ -420,7 +516,10 @@ function MainGameScene:runYelloCar(car)
         --变轨固定在这个点 转到外部的轨道
         local circle1 = cc.Spawn:create(tt.CircleBy:create(tm/2,{x=-25,y=-self.track_size.height*0.4},-90),cc.RotateBy:create(tm/2,-90))
         local circle2 = cc.Spawn:create(tt.CircleBy:create(tm/2,{x=225,y=self.track_size.height*0.02},-90),cc.RotateBy:create(tm/2,-90))
-        spawn2 = cc.Sequence:create(circle1,circle2)
+        spawn2 = cc.Sequence:create(
+        circle1,cc.CallFunc:create(function()self.yello_switch = false end),
+        circle2
+        )
         --代表外圈轨道
         self.yello_switch = false
     end
@@ -434,6 +533,8 @@ function MainGameScene:runYelloCar(car)
     local action_yello = cc.Sequence:create(move1,spawn1,move2,spawn2,callfunc)
     action_yello:setTag(2)
     
+    --使用玩switch来获得运动的轨迹以后，将原始switch还给小车
+    self.yello_switch = switch
     car:runAction(action_yello)
 end
 
@@ -443,6 +544,32 @@ function MainGameScene:addBg(layer)
     local bg = cc.Sprite:create("bg.png")
     bg:setPosition(self.size.width/2,self.size.height/2)
     layer:addChild(bg)
+    
+    --play
+    self:setButton("play.png",layer)
+end
+
+function MainGameScene:setButton(imageName,layer)
+    local play = cc.MenuItemImage:create(imageName,"","")
+    play:setPosition(self.size.width/2,self.size.height/2)
+    play:setScale(0.8)
+    local menu = cc.Menu:create(play)
+    menu:setPosition(cc.p(0,0))
+    layer:addChild(menu,3)
+
+    --callback
+    local play_callback = function()
+        --播放音效
+        SoundDeal:playEffect(EffectType.Start)
+        play:runAction(cc.Sequence:create(cc.ScaleTo:create(0.05,1.3),cc.RemoveSelf:create()))
+        self:runRedCar(self.car_red)
+        self:runYelloCar(self.car_yello)
+        self.play = true
+        self:collision(layer)
+    end
+    play:registerScriptTapHandler(play_callback)
+    --判断游戏是否开始的变量
+    self.play = false
 end
 
 return MainGameScene

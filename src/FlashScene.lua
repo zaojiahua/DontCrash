@@ -1,6 +1,7 @@
 --使用require引入模块
 require("Cocos2d")
 require("Cocos2dConstants")
+require("SoundDeal")
 
 --创建一个类，继承自scene
 local FlashScene = class("FlashScene",function()
@@ -20,6 +21,11 @@ function FlashScene:create()
     local flashScene = FlashScene:new()
     local layer = flashScene:createLayer()
     flashScene:addChild(layer)
+    
+    --加载音效
+    SoundDeal:preloadEffect()
+    --播放背景声音
+    SoundDeal:playBg()
     
     return flashScene
 end
