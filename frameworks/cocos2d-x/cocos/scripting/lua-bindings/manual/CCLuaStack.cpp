@@ -76,6 +76,7 @@ extern "C" {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "lua_cocos2dx_experimental_video_auto.hpp"
 #include "lua_cocos2dx_experimental_video_manual.hpp"
+#include "lua_cocos2dx_custom_auto.hpp"
 #endif
 
 namespace {
@@ -192,6 +193,8 @@ bool LuaStack::init(void)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     register_all_cocos2dx_experimental_video(_state);
     register_all_cocos2dx_experimental_video_manual(_state);
+    //注册我们的函数
+    register_all_cocos2dx_custom(_state);
 #endif
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

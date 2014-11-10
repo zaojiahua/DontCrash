@@ -1935,6 +1935,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040B2E8B1A0DE32D007455BA /* WeixinShare.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WeixinShare.cpp; path = ../cocos/custom/WeixinShare.cpp; sourceTree = "<group>"; };
+		040B2E8C1A0DE32D007455BA /* WeixinShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeixinShare.h; path = ../cocos/custom/WeixinShare.h; sourceTree = "<group>"; };
+		0454BD061A0F336300AE9558 /* WapsAd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WapsAd.cpp; path = ../cocos/custom/WapsAd.cpp; sourceTree = "<group>"; };
+		0454BD071A0F336300AE9558 /* WapsAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WapsAd.h; path = ../cocos/custom/WapsAd.h; sourceTree = "<group>"; };
 		0634A4C5194B19E400E608AF /* CCActionTimeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionTimeline.cpp; sourceTree = "<group>"; };
 		0634A4C6194B19E400E608AF /* CCActionTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionTimeline.h; sourceTree = "<group>"; };
 		0634A4C7194B19E400E608AF /* CCActionTimelineCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionTimelineCache.cpp; sourceTree = "<group>"; };
@@ -3010,6 +3014,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040B2E8A1A0DE30D007455BA /* custom */ = {
+			isa = PBXGroup;
+			children = (
+				0454BD061A0F336300AE9558 /* WapsAd.cpp */,
+				0454BD071A0F336300AE9558 /* WapsAd.h */,
+				040B2E8B1A0DE32D007455BA /* WeixinShare.cpp */,
+				040B2E8C1A0DE32D007455BA /* WeixinShare.h */,
+			);
+			name = custom;
+			sourceTree = "<group>";
+		};
 		0634A4C4194B19E400E608AF /* ActionTimeline */ = {
 			isa = PBXGroup;
 			children = (
@@ -3031,6 +3046,7 @@
 		1551A334158F2AB200E66CFE = {
 			isa = PBXGroup;
 			children = (
+				040B2E8A1A0DE30D007455BA /* custom */,
 				46A15FCC1807A544005B8026 /* AUTHORS */,
 				1A57FFF7180BC5160088DEC7 /* CHANGELOG */,
 				50272539190BF1B900AAF4ED /* cocos2d.cpp */,

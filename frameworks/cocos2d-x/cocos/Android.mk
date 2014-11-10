@@ -182,7 +182,9 @@ physics/chipmunk/CCPhysicsWorldInfo_chipmunk.cpp \
 ../external/unzip/ioapi.cpp \
 ../external/unzip/unzip.cpp \
 ../external/edtaa3func/edtaa3func.cpp \
-../external/xxhash/xxhash.c
+../external/xxhash/xxhash.c \
+custom/WeixinShare.cpp \
+custom/WapsAd.cpp \
 
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \

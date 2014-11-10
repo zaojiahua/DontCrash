@@ -35,6 +35,11 @@ function MainGameScene:createLayer()
     
     --ui
     self:setUI(layer)
+    
+    --加入广告
+    if cc.Application:getInstance():getTargetPlatform() == cc.PLATFORM_OS_ANDROID then
+        cc.WapsAd:showAd(14)
+    end
       
     return layer
 end
@@ -88,12 +93,57 @@ end
 
 --游戏介绍以后的处理
 function MainGameScene:gameOver(layer)
-    self:setButton("retry.png",layer)
     --清除数据
     GlobalData:reset()
     self.score:setString("0")
     --重新设置小车的位置
     self:resetCar()
+    
+    --添加分享和更多菜单项
+    self:addButton(layer)
+end
+
+function MainGameScene:addButton(layer)
+    local share = cc.MenuItemImage:create("share.png","","")
+    share:setScale(0.8)
+    local more = cc.MenuItemImage:create("more.png","","")
+    more:setScale(0.8)
+    local retry = cc.MenuItemImage:create("retry.png","","")
+    retry:setScale(0.8)
+    local menu = cc.Menu:create(share,retry,more)
+    menu:alignItemsHorizontallyWithPadding(self.size.width*0.1)
+    menu:setPosition(cc.p(self.size.width/2,self.size.height/2))
+    layer:addChild(menu,3)
+
+    --callback
+    local retry_callback = function()
+        --播放音效
+        SoundDeal:playEffect(EffectType.Start)
+        retry:runAction(cc.Sequence:create(cc.ScaleTo:create(0.05,1.3),
+            cc.CallFunc:create(function()menu:removeFromParentAndCleanup(true) end)))
+        self:runRedCar(self.car_red)
+        self:runYelloCar(self.car_yello)
+        self.play = true
+        self:collision(layer)
+    end
+    local share_callback = function()
+        share:runAction(cc.Sequence:create(cc.ScaleTo:create(0.05,1.3),cc.ScaleTo:create(0.05,0.8)))
+        if cc.Application:getInstance():getTargetPlatform() == cc.PLATFORM_OS_ANDROID then
+            cc.WeixinShare:sendToTimeLine()
+        end
+    end
+    local more_callback = function()
+        --加入插屏广告
+        if cc.Application:getInstance():getTargetPlatform() == cc.PLATFORM_OS_ANDROID then
+            cc.WapsAd:showAd(1)
+        end
+        more:runAction(cc.Sequence:create(cc.ScaleTo:create(0.05,1.3),cc.ScaleTo:create(0.05,0.8)))
+    end
+    retry:registerScriptTapHandler(retry_callback)
+    share:registerScriptTapHandler(share_callback)
+    more:registerScriptTapHandler(more_callback)
+    --判断游戏是否开始的变量
+    self.play = false
 end
 
 --用户交互

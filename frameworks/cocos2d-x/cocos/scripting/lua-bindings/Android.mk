@@ -39,6 +39,7 @@ LOCAL_SRC_FILES := manual/CCLuaBridge.cpp \
           auto/lua_cocos2dx_physics_auto.cpp \
           auto/lua_cocos2dx_experimental_auto.cpp \
           auto/lua_cocos2dx_experimental_video_auto.cpp \
+          auto/lua_cocos2dx_custom_auto.cpp \
           ../../../external/lua/tolua/tolua_event.c \
           ../../../external/lua/tolua/tolua_is.c \
           ../../../external/lua/tolua/tolua_map.c \

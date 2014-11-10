@@ -1,4 +1,4 @@
-/Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/gen/org/cocos2dx/DontCrash/R.java \
+/Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/gen/com/zaojiahua/DontCrash/R.java \
  : /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/res/drawable-hdpi/icon.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/res/drawable-ldpi/icon.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/res/drawable-mdpi/icon.png \

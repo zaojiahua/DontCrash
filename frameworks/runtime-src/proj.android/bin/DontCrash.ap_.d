@@ -44,13 +44,13 @@
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/car2.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/car3.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/car4.png \
-/Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/fenxiang.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/fonts \
-/Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/gengduo.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/logo.png \
+/Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/more.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/particle \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/play.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/retry.png \
+/Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/share.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/sound \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/track.png \
 /Users/mac/Documents/code/cocos_code_ide/DontCrash/frameworks/runtime-src/proj.android/assets/res/fonts/1.fnt \
